@@ -77,3 +77,35 @@ JOIN Usuario u
 JOIN Compuesto c
     ON cu.CompuestoId = c.CompuestoId
 ORDER BY cu.UploadDate;
+
+INSERT INTO Propiedades (
+    CompuestoId,
+    Metodos_Extraccion,
+    Metodos_Identificacion,
+    Metodos_Cuantificacion,
+    Estudios_in_vitro,
+    Estudios_in_cellula,
+    Estudios_in_vivo,
+    Estudios_in_silico,
+    Vias_Metabolicas_Afectadas,
+    Mecanismo_Accion,
+    Biodisponibilidad,
+    Propiedades_PK,
+    Propiedades_PD
+)
+VALUES (
+    21,
+    'No aplica directamente (se utilizaron flavonoides estándares purificados)',
+    'No especificado',
+    'No especificado',
+    'Modelos celulares de neurotoxicidad (PFCs, líneas neuronales; según estudios paralelos del grupo).',
+    'No reportado',
+    'Modelos animales de neurotoxicidad inducida',
+    'No reportado',
+    'No reportado',
+    'No reportado',
+    'No estudiado',
+    'No evaluadas',
+    'No evaluadas'
+);
+
