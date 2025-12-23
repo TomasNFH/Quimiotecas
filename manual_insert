@@ -1,0 +1,57 @@
+-- 1.1 Insert publication (id es DOI)
+INSERT INTO Publicacion (DOI, Nombre_Publicacion)
+VALUES ('10.1590/s0100-879x2003001200002', 'Neuroprotection by Flavonoids');
+
+
+-- 2.1 Insert compound (CompuestoId se genera auto)
+INSERT INTO Compuesto (
+    Codigo_IUPAC,
+    Codigo_SMILES,
+    Publicacion
+)
+VALUES (
+    '2-(3,4-dihydroxyphenyl)-3,5,7-trihydroxy-4H-chromen-4-one',
+    'C1=CC(=C(C=C1C2=C(C(=O)C3=C(C=C(C=C3O2)O)O)O)O)O',
+    '10.1590/s0100-879x2003001200002'
+);
+
+-- 2.2 Get CompuestoId
+SELECT CompuestoId
+FROM Compuesto
+WHERE Codigo_IUPAC = '2-(3,4-dihydroxyphenyl)-3,5,7-trihydroxy-4H-chromen-4-one';
+
+-- 2.3 Add N:N relation between Compuesto and Publicacion
+INSERT INTO Publicacion_Compuesto (DOI, CompuestoId)
+VALUES ('10.1590/s0100-879x2003001200002', 21);
+
+
+-- 3.1 Insert Autors (ID se genera auto)
+INSERT INTO Autor (Nombre, Apellido)
+VALUES ('Horacio', 'Heinzen');
+
+INSERT INTO Autor (Nombre, Apellido)
+VALUES ('Federico', 'Dajas');
+
+-- 3.2 Get ID
+SELECT ID
+FROM Autor
+WHERE Nombre = 'Horacio' AND Apellido = 'Heinzen';
+
+-- 3.3 Add N:N relation between Autor and Publicacion
+INSERT INTO Publicacion_Autor (DOI, AutorId, ClaseAutorId)
+VALUES ('10.1590/s0100-879x2003001200002', 2, 1); -- PRIMARIO
+
+INSERT INTO Publicacion_Autor (DOI, AutorId, ClaseAutorId)
+VALUES ('10.1590/s0100-879x2003001200002', 1, 2); -- SECUNDARIO
+
+-- 3.EXTRA review 
+SELECT
+    p.Nombre_Publicacion,
+    a.Nombre,
+    a.Apellido,
+    ca.NombreClase
+FROM Publicacion p
+JOIN Publicacion_Autor pa ON p.DOI = pa.DOI
+JOIN Autor a ON pa.AutorId = a.id
+JOIN ClaseAutor ca ON pa.ClaseAutorId = ca.ClaseAutorId;
+
