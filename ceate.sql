@@ -133,10 +133,12 @@ CREATE TABLE UserUpload (
     UploadId NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     CompuestoId NUMBER NOT NULL,
 
-    FileName VARCHAR2(255) NOT NULL,
-    FileType VARCHAR2(50),
-    UploadDate DATE DEFAULT SYSDATE,
+    UserName  VARCHAR2(255) NOT NULL,
+    UserClass VARCHAR2(50)
+        CHECK (UserClass IN ('ADMIN', 'RESEARCHER')),
 
     CONSTRAINT fk_upload_compuesto
-        FOREIGN KEY (CompuestoId) REFERENCES Compuesto(CompuestoId)
+        FOREIGN KEY (CompuestoId)
+        REFERENCES Compuesto(CompuestoId)
 );
+
