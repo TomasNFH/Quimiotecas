@@ -55,7 +55,25 @@ JOIN Publicacion_Autor pa ON p.DOI = pa.DOI
 JOIN Autor a ON pa.AutorId = a.id
 JOIN ClaseAutor ca ON pa.ClaseAutorId = ca.ClaseAutorId;
 
+
 -- X.1 Insert Usuario
 INSERT INTO Usuario (UserName, UserClass)
 VALUES ('tferraz', 'RESEARCHER')
 
+-- X.2 Add N:N relation between Usuario and Compuesto
+INSERT INTO CargaUsuario (UsuarioId, CompuestoId)
+VALUES (1, 21);
+
+-- X.EXTRA review 
+SELECT
+    cu.UploadId,
+    u.UserName,
+    c.Codigo_IUPAC AS Nombre_Compuesto,
+    cu.CompuestoId,
+    cu.UploadDate
+FROM CargaUsuario cu
+JOIN Usuario u
+    ON cu.UsuarioId = u.UsuarioId
+JOIN Compuesto c
+    ON cu.CompuestoId = c.CompuestoId
+ORDER BY cu.UploadDate;
