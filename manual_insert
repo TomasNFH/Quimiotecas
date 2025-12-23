@@ -55,3 +55,7 @@ JOIN Publicacion_Autor pa ON p.DOI = pa.DOI
 JOIN Autor a ON pa.AutorId = a.id
 JOIN ClaseAutor ca ON pa.ClaseAutorId = ca.ClaseAutorId;
 
+-- X.1 Insert Usuario
+INSERT INTO Usuario (UserName, UserClass)
+VALUES ('tferraz', 'RESEARCHER')
+
