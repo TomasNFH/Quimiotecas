@@ -129,7 +129,20 @@ CREATE TABLE Compuesto_Fuente (
         FOREIGN KEY (FuenteId) REFERENCES Fuente(FuenteId)
 );
 
-CREATE TABLE UserUpload (
+--------------------------------------------------------------------------------
+-- TABLA: Ususrios
+--------------------------------------------------------------------------------
+CREATE TABLE Usuario (
+    UsuarioId NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    UserName  VARCHAR2(255) NOT NULL UNIQUE,
+    UserClass VARCHAR2(50)
+        CHECK (UserClass IN ('ADMIN', 'RESEARCHER'))
+);
+
+--------------------------------------------------------------------------------
+-- TABLA RELACIONAL: CargaUsuario
+--------------------------------------------------------------------------------
+CREATE TABLE CargaUsuario (
     UploadId NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     CompuestoId NUMBER NOT NULL,
 
