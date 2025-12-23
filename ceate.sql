@@ -144,14 +144,14 @@ CREATE TABLE Usuario (
 --------------------------------------------------------------------------------
 CREATE TABLE CargaUsuario (
     UploadId NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    UsuarioId NUMBER NOT NULL,
     CompuestoId NUMBER NOT NULL,
+    UploadDate DATE DEFAULT SYSDATE,
 
-    UserName  VARCHAR2(255) NOT NULL,
-    UserClass VARCHAR2(50)
-        CHECK (UserClass IN ('ADMIN', 'RESEARCHER')),
+    CONSTRAINT fk_upload_usuario
+        FOREIGN KEY (UsuarioId) REFERENCES Usuario(UsuarioId),
 
     CONSTRAINT fk_upload_compuesto
-        FOREIGN KEY (CompuestoId)
-        REFERENCES Compuesto(CompuestoId)
+        FOREIGN KEY (CompuestoId) REFERENCES Compuesto(CompuestoId)
 );
 
